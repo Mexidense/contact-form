@@ -1,0 +1,16 @@
+<form action="/email.php" method="POST" data-aos="fade-up" data-aos-delay="300" class="aos-init aos-animate">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name..." required="">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Enter you email..." required="">
+    <label for="service" id="service">Service</label>
+    <select name="service" id="service">
+        <option value="Web Design">Web Design</option>
+        <option value="Backend Development">Backend Development</option>
+        <option value="Frontend Development">Frontend Development</option>
+        <option value="Full Stack Development">Full Stack Development</option>
+    </select>
+    <label for="message">Message</label>
+    <textarea name="message" id="message" cols="10" rows="10"></textarea>
+    <input type="submit" value="Submit">
+</form>
