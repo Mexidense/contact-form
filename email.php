@@ -27,7 +27,7 @@ try {
         }
 
         //Server settings
-        $mail->SMTPDebug = 2;                          // Enable verbose debug output
+        // $mail->SMTPDebug = 2;                          // Enable verbose debug output
         $mail->isSMTP();                               // Set mailer to use SMTP
         $mail->Host       = getenv('HOST_EMAIL');      // Specify main and backup SMTP servers
         $mail->SMTPAuth   = true;                      // Enable SMTP authentication
@@ -48,8 +48,19 @@ try {
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
-        echo 'Message has been sent';
+        jsonResponse(['data' => 'Email has been sent']);
     }  
 } catch (Exception $e) {
+    jsonResponse(['error' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo . '}'], 404);
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
+function jsonResponse($data = null, $httpStatus = 200)
+{
+    header_remove();
+    header("Content-Type: application/json");
+    header('Status: ' . $httpStatus);
+    http_response_code($httpStatus);
+
+    echo json_encode($data);
 }
